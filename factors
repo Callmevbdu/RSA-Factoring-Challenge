@@ -45,7 +45,7 @@ if __name__ == "__main__":
         if facts:
             print(f"{n}={facts[0]}*{facts[1]}")
 
-        ''' The program terminates with an error message if the elapsed
+        ''' The program exits with an error message if the elapsed
         time is greater than 5 seconds.
         '''
         if time.time() - launch > 5:
