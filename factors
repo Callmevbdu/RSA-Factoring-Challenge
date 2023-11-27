@@ -1,0 +1,63 @@
+#!/usr/bin/python3
+import sys
+import time
+
+
+def factor(n):
+    ''' A function which takes a number.
+        n: input integer.
+        Return:
+        - If the number is not prime, then a tuple of two factors.
+        - If the number is prime, none.
+    '''
+
+    for x in range(2, int(n**0.5)+1):
+        if n % x == 0:
+            return (x, n//x)
+    return None
+
+
+if __name__ == "__main__":
+
+
+    ''' Reading a file. '''
+
+    if len(sys.argv) != 2:
+        print("Usage: factors <file>")
+        exit()
+
+
+    inpFile = sys.argv[1]
+
+
+    try:
+        with open(inpFile, 'r') as files:
+            mulLines = files.readlines()
+    except FileNotFoundError:
+        print("File not found.")
+        exit()
+
+
+    launch = time.time()
+
+
+    ''' a function that calls "factor" on each number as it iterates
+    across each line.
+    The factorization is printed in the required manner if "factor" returns
+    a tuple of factors.
+    '''
+
+    for oneLine in mulLines:
+        n = int(oneLine.strip())
+        facts = factor(n)
+        if facts:
+            print(f"{n}={facts[0]}*{facts[1]}")
+
+
+        ''' The program terminates with an error message if the elapsed
+        time is greater than 5 seconds.
+        '''
+
+        if time.time() - launch > 5:
+            print("Reached time limit.")
+            exit()
